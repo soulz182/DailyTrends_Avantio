@@ -28,56 +28,78 @@
             </div>
         </div>
         
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/11/08/16679231049206.gif" style="width:100%;" alt="Imagen noticia"></a></div>
+        <?php
+         
+        $html = file_get_html('https://www.elmundo.es');
+        $news_content = $html->find('div[class=ue-c-cover-content__body]');
+        $i = 1;
+
+        foreach(array_slice($news_content,0) as $news_res) {
+           
+        $article_title = $news_res->find("a[class=ue-c-cover-content__link]",0);
+        $article_publisher = $news_res->find(".ue-c-cover-content__byline-name", 0);
+        $article_source = $news_res->find(".ue-c-cover-content__byline-location", 0);
+            
+        $html_img = file_get_html($article_title->href);
+        $article_image = $news_res->find("div.ue-c-cover-content__media figure picture img",0);
+            
+            
+            if($i>0 && $i<=5) {
+                
+                echo '<div class="row">
+                                    ';
+                                    
+                                
+            
+                if($article_image==null){
+                     echo '
+                    <div class="articleContainer pt-4 row">
+                        <div class="col-3"><a href="'.$article_title->href.'"><img src="img/elmundo_logo.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><h2>¿Por qué los republicanos son los favoritos?</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span> DALILA M. OLMO LÓPEZ </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/11/08/16679231049206.gif" style="width:100%;" alt="Imagen noticia"></a></div>
+                        <div class="col-9 articleTitle"><a href="'.$article_title->href.'"><h2>'.$article_title.'</h2></a></div>
+                        <p></p>
+                        <div class="pt-4 col-12">
+                        <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span>'.$article_publisher->outertext.'</span></div>
+                    </div>
+                    </div>
+                        '
+                    ;
+                   
+
+                } else {
+                    echo '
+                    <div class="articleContainer pt-4 row">
+                        <div class="col-3"><a href="'.$article_title->href.'"><img src="'.$article_image->src.'" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><h2>¿Por qué los republicanos son los favoritos?</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span> DALILA M. OLMO LÓPEZ </span></div>
-            </div>
-        </div>
+                        <div class="col-9 articleTitle"><a href="'.$article_title->href.'"><h2>'.$article_title.'</h2></a></div>
+                        <p></p>
+                        <div class="pt-4 col-12">
+                        <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span>'.$article_publisher->outertext.'</span></div>
+                    </div>
+                    </div>
+                        '
+                    ;
+                     
+                }
+                
+                $i++;
+                
+            } else {
+                break;
+            }
+            
+            
+        }
+            
+        $html->clear();
+        unset($html);
+        $html_img->clear();
+        unset($html_img);
         
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/11/08/16679231049206.gif" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><h2>¿Por qué los republicanos son los favoritos?</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span> DALILA M. OLMO LÓPEZ </span></div>
-            </div>
-        </div>
         
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/11/08/16679231049206.gif" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><h2>¿Por qué los republicanos son los favoritos?</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span> DALILA M. OLMO LÓPEZ </span></div>
-            </div>
-        </div>
+        ?>
         
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/11/08/16679231049206.gif" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://www.elmundo.es/internacional/2022/11/08/63697c0ffdddffd30c8b4595.html"><h2>¿Por qué los republicanos son los favoritos?</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span> DALILA M. OLMO LÓPEZ </span></div>
-            </div>
-        </div>
-        
+      
         
         
         
@@ -90,58 +112,76 @@
             </div>
         </div>
         
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><img src="https://imagenes.elpais.com/resizer/0Q-reKFDjexhWHlW4wHW31o7eA8=/414x233/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PK6HR7UDBRECXK37EQOTBD4JCM.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
+        
+        
+        <?php
+        
+        $html2 = file_get_html('https://elpais.com/');
+        $news_content2 = $html2->find('.c-d');
+        $i2 = 1;
+
+        foreach($news_content2 as $news_res2) {
+        
+        $article_title2 = $news_res2->find("h2[class=c_t]",0);
+        $article_link2 = $news_res2->find("h2[class=c_t] a",0);
+        $article_publisher2 = $news_res2->find(".c_a_a",0);
+        $article_src = $news_res2->find("p[class=c_d]",0);
+        $article_image2 = $news_res2->find("div.b-d_b article figure a img",0);
+            
+            if($i2<=5){
+                
+                if($article_image2==null){
+                    
+                    
+                    
+                     echo  '
+                    <div class="articleContainer pt-4 row">
+                        <div class="col-3"><a href="https://elpais.com'.$article_link2->href.'"><img src="img/elpais_logo.png" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><h2>El Gobierno descarta construir un cementerio nuclear y cada central guardará sus residuos</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL PAÍS</b> |<span><span class="hidden-content"> Redacción: </span> ALBERT GARCIA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><img src="https://imagenes.elpais.com/resizer/0Q-reKFDjexhWHlW4wHW31o7eA8=/414x233/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PK6HR7UDBRECXK37EQOTBD4JCM.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
+                        <div class="col-9 articleTitle"><h2><a href="https://elpais.com'.$article_link2->href.'">'.$article_title2->plaintext.'</a></h2></div>
+                        <p></p>
+                        <div class="pt-4 col-12">
+                        <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span>'.$article_publisher2.'</span></div>
+                    </div>
+                    </div>
+                        '
+                    ;
+                    
+                    
+                    
+                   
+                    
+                    
+                } else {
+                    
+                    echo '
+                    <div class="articleContainer pt-4 row">
+                        <div class="col-3"><a href="https://elpais.com'.$article_link2->href.'"><img src="'.$article_image2->src.'" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><h2>El Gobierno descarta construir un cementerio nuclear y cada central guardará sus residuos</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL PAÍS</b> |<span><span class="hidden-content"> Redacción: </span> ALBERT GARCIA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><img src="https://imagenes.elpais.com/resizer/0Q-reKFDjexhWHlW4wHW31o7eA8=/414x233/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PK6HR7UDBRECXK37EQOTBD4JCM.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><h2>El Gobierno descarta construir un cementerio nuclear y cada central guardará sus residuos</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL PAÍS</b> |<span><span class="hidden-content"> Redacción: </span> ALBERT GARCIA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><img src="https://imagenes.elpais.com/resizer/0Q-reKFDjexhWHlW4wHW31o7eA8=/414x233/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PK6HR7UDBRECXK37EQOTBD4JCM.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><h2>El Gobierno descarta construir un cementerio nuclear y cada central guardará sus residuos</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL PAÍS</b> |<span><span class="hidden-content"> Redacción: </span> ALBERT GARCIA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><img src="https://imagenes.elpais.com/resizer/0Q-reKFDjexhWHlW4wHW31o7eA8=/414x233/cloudfront-eu-central-1.images.arcpublishing.com/prisa/PK6HR7UDBRECXK37EQOTBD4JCM.jpg" style="width:100%;" alt="Imagen noticia"></a></div>
-                                            
-            <div class="col-9 articleTitle"><a href="https://elpais.com/clima-y-medio-ambiente/2022-11-08/el-gobierno-descarta-construir-un-solo-cementerio-nuclear-y-cada-central-guardara-sus-residuos.html"><h2>El Gobierno descarta construir un cementerio nuclear y cada central guardará sus residuos</h2></a></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>EL PAÍS</b> |<span><span class="hidden-content"> Redacción: </span> ALBERT GARCIA </span></div>
-            </div>
-        </div>
+                        <div class="col-9 articleTitle"><h2><a href="https://elpais.com'.$article_link2->href.'">'.$article_title2->plaintext.'</a></h2></div>
+                        <p></p>
+                        <div class="pt-4 col-12">
+                        <div class="articleDetails"><b>EL MUNDO</b> |<span><span class="hidden-content"> Redacción: </span>'.$article_publisher2.'</span></div>
+                    </div>
+                    </div>
+                        '
+                    ;
+                    
+                    
+                    
+                }
+                
+                $i2++;
+                
+                
+            } else {
+                break;
+            }
+            
+        }
         
         
-        
+        ?>
         
            <!-- NOTICIAS CUSTOM -->
         <div id="masnoticias" class="sectionTitle row pt-4">
