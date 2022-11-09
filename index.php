@@ -46,8 +46,7 @@
             
             if($i>0 && $i<=5) {
                 
-                echo '<div class="row">
-                                    ';
+                
                                     
                                 
             
