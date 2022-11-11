@@ -190,55 +190,57 @@
         </div>
         
         
-       <div class="articleContainer pt-4 row">
-            <div class="col-3"><img src="img/news1.jpg" style="width:100%;" alt="Imagen noticia"></div>
+		<?php
+
+                    $pdo = Database::connect();
+                    $sql = 'SELECT * FROM news ORDER BY id_news DESC';
+    
+    
+
+                    foreach ($pdo->query($sql) as $row) {
+                        $text = strlen($row['text']) > 250 ? substr($row['text'],0,250)."..." : $row['text'];
+                        
+                        if($row['image']==null){
+                            
+                           
+							
+							echo  '
+                    			<div class="articleContainer pt-4 row">
+                        			<div class="col-3"><a href="read.php?id='.$row['id_news'].'"><img src="img/elpais_logo.png" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><h2>Diseño para aprender jugando </h2></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>AVANTIO</b> |<span><span class="hidden-content"> Redacción: </span> JESÚS PAINCEIRA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><img src="img/news1.jpg" style="width:100%;" alt="Imagen noticia"></div>
+                        			<div class="col-9 articleTitle"><h2><a href="read.php?id='.$row['id_news'].'">'.$row['title'].'</a></h2></div>
+                        			<p></p>
+                        			<div class="pt-4 col-12">
+                        				<div class="articleDetails"><b>'.$row['source'].'</b> |<span><span class="hidden-content"> Redacción: </span>'.$row['publisher'].'</span></div>
+									</div>
+                    			</div>
+                        '
+                    ;
+                            
+                        } else {
+                            
+                            echo  '
+                    			<div class="articleContainer pt-4 row">
+                        			<div class="col-3"><a href="read.php?id='.$row['id_news'].'"><img src="'.$row['image'].'" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
-            <div class="col-9 articleTitle"><h2>Diseño para aprender jugando </h2></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>AVANTIO</b> |<span><span class="hidden-content"> Redacción: </span> JESÚS PAINCEIRA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><img src="img/news1.jpg" style="width:100%;" alt="Imagen noticia"></div>
-                                            
-            <div class="col-9 articleTitle"><h2>Diseño para aprender jugando </h2></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>AVANTIO</b> |<span><span class="hidden-content"> Redacción: </span> JESÚS PAINCEIRA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><img src="img/news1.jpg" style="width:100%;" alt="Imagen noticia"></div>
-                                            
-            <div class="col-9 articleTitle"><h2>Diseño para aprender jugando </h2></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>AVANTIO</b> |<span><span class="hidden-content"> Redacción: </span> JESÚS PAINCEIRA </span></div>
-            </div>
-        </div>
-        
-        <div class="articleContainer pt-4 row">
-            <div class="col-3"><img src="img/news1.jpg" style="width:100%;" alt="Imagen noticia"></div>
-                                            
-            <div class="col-9 articleTitle"><h2>Diseño para aprender jugando </h2></div>
-            <p></p>
-            <div class="pt-4 col-12">
-                <div class="articleDetails"><b>AVANTIO</b> |<span><span class="hidden-content"> Redacción: </span> JESÚS PAINCEIRA </span></div>
-            </div>
-        </div>
+                        			<div class="col-9 articleTitle"><h2><a href="read.php?id='.$row['id_news'].'">'.$row['title'].'</a></h2></div>
+                        			<p></p>
+                        			<div class="pt-4 col-12">
+                        				<div class="articleDetails"><b>'.$row['source'].'</b> |<span><span class="hidden-content"> Redacción: </span>'.$row['publisher'].'</span></div>
+									</div>
+                    			</div>
+                        '
+                            ;
+                            
+                        }
+                            
+                        
+                            
+                        }
+
+                    Database::disconnect();
+                    
+                    ?>
         
        
         
