@@ -65,3 +65,84 @@
     color: black;
     text-decoration: underline;
 }
+
+.createForm {
+	border: 1px solid;
+	padding: 25px;
+	border-radius: 1.85em;
+}
+
+.form-control {
+	border-radius: 1.55em;
+}
+
+.btn {
+	border-radius: 2em;
+	padding: 10px 15px;
+}
+
+.btnCrear {
+	background-color: #000000;
+    color: #ffffff;
+    border-radius: 5em;
+    border: 1px solid #000;
+    padding: 6px 15px 6px 15px;
+    width: fit-content;
+}
+
+.btnCrear:hover {
+    background-color: #ffffff;
+    color: #000000;
+    
+}
+
+.btnGreenCrear {
+	background-color: #3E9F42;
+    color: #ffffff;
+    border-radius: 5em;
+    border: 1px solid #000;
+    padding: 6px 15px 6px 15px;
+    width: fit-content;
+}
+
+.btnGreenCrear:hover {
+    background-color: #ffffff;
+    color: #000000;
+    
+}
+
+.btnEditar {
+	background-color: #000000;
+    color: #ffffff;
+    border-radius: 5em;
+    border: 1px solid #000;
+    padding: 6px 15px 6px 15px;
+    width: fit-content;
+	float: right;
+}
+
+.btnEditar:hover {
+    background-color: #ffffff;
+    color: #000000;
+    
+}
+
+.btnBorrar {
+	background-color: #B83133;
+    color: #ffffff;
+    border-radius: 5em;
+    border: 1px solid #000;
+    padding: 6px 15px 6px 15px;
+    width: fit-content;
+	float: right;
+	margin-left: 10px;
+}
+.btnBorrar:hover {
+    background-color: #ffffff;
+    color: #000000;
+    
+}
+
+.interiorTitle {
+	border-bottom: solid 1px;
+}

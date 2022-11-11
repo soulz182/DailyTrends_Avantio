@@ -128,12 +128,14 @@
         $article_image2 = $news_res2->find("div.b-d_b article figure a img",0);
             
             if($i2<=5){
-                
-                if($article_image2==null){
+                if(($article_link2)==null)
+                {
                     
+                    $i2--;
                     
+                } else if($article_image2==null) {
                     
-                     echo  '
+                    echo  '
                     <div class="articleContainer pt-4 row">
                         <div class="col-3"><a href="https://elpais.com'.$article_link2->href.'"><img src="img/elpais_logo.png" style="width:100%;" alt="Imagen noticia"></a></div>
                                             
@@ -148,10 +150,10 @@
                     
                     
                     
-                   
-                    
-                    
-                } else {
+                }
+                
+                
+                else {
                     
                     echo '
                     <div class="articleContainer pt-4 row">
@@ -186,6 +188,7 @@
         <div id="masnoticias" class="sectionTitle row pt-4">
             <div class="col-12">
                 <h2 class="newspaperTitle">Más Noticias</h2>
+				<a href="create.php" class="btn btnCrear">Nueva Noticia</a>
             </div>
         </div>
         
